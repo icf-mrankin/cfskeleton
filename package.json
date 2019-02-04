@@ -1,0 +1,33 @@
+{
+  "name": "cfskeleton",
+  "version": "1.0.0",
+  "description": "Quick startup for cf app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icf-mrankin/cfskeleton.git"
+  },
+  "keywords": [
+    "cfml",
+    "lucee",
+    "fw1"
+  ],
+  "author": "Mike Rankin <mrankin@icf.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/icf-mrankin/cfskeleton/issues"
+  },
+  "homepage": "https://github.com/icf-mrankin/cfskeleton#readme",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "qrcodejs": "^1.0.0",
+    "tether": "^1.4.5"
+  },
+  "devDependencies": {
+    "bootstrap": "^4.2.1",
+    "webpack": "^4.29.0"
+  }
+}
