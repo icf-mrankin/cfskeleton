@@ -1,0 +1,35 @@
+version: '2'
+services:
+  web:
+    container_name: cfsweb
+    image: lucee/lucee52-nginx:latest
+    ports:
+      - "80:8888"
+      - "443:8443"
+    volumes:
+      - ./wwwroot:/var/www
+    depends_on:
+      - mailcatcher
+      - db
+    links:
+      - mailcatcher
+      - db
+  mailcatcher:
+    container_name: cfssmtp
+    image: schickling/mailcatcher
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+  db:
+    container_name: cfsdb
+    image: mysql/mysql-server:5.7.16
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=MyDogHas1Flea
+      - MYSQL_DATABASE=cfskeleton
+      - MYSQL_USER=ColdFusion
+      - MYSQL_PASSWORD=cfskeleton
+      - MYSQL_ROOT_HOST=%
