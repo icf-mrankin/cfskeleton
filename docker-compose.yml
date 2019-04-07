@@ -8,6 +8,7 @@ services:
       - "443:8443"
     volumes:
       - ./wwwroot:/var/www
+      - ./local_containers/web/logs:/usr/local/tomcat/logs 
     depends_on:
       - mailcatcher
       - db
@@ -26,7 +27,9 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./data:/var/lib/mysql
+      - ./local_containers/db/data:/var/lib/mysql
+      - ./local_containers/db/logs:/var/log/mysql 
+      - ./local_containers/db/conf:/etc/mysql/conf.d 
     environment:
       - MYSQL_ROOT_PASSWORD=MyDogHas1Flea
       - MYSQL_DATABASE=cfskeleton

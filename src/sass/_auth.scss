@@ -1,0 +1,21 @@
+.storeBtn { 
+    background-repeat: no-repeat;    
+    background-size: contain; 
+    height: 44px; 
+    width: 148px; 
+} 
+ 
+#ios { 
+    background-image: url('/images/ios-app-store.svg'); 
+    float:left; 
+} 
+ 
+#android { 
+    background-image: url('/images/googleplay.svg'); 
+    float:left; 
+} 
+ 
+#windows { 
+    background-image: url('/images/get-it-from-MS.png'); 
+    float:left; 
+} 
