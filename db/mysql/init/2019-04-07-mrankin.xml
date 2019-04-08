@@ -6,24 +6,29 @@
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet id="1" author="mrankin">
         <createTable tableName="auth_user">
-            <column name="email" type="varchar(200)"><constraints nullable="false" primaryKey="true" primaryKeyName="pk_auth_user"/> </column>
-            <column name="password_hash" type="varchar(500)"><constraints nullable="false"/> </column>
-            <column name="salt" type="varchar(500)"><constraints nullable="false"/> </column>
-            <column name="first_name" type="varchar(100)" defaultValue=""><constraints nullable="false"/> </column>
-            <column name="last_name" type="varchar(100)" defaultValue=""><constraints nullable="false"/> </column>
-            <column name="title" type="varchar(200)" defaultValue=""><constraints nullable="false"/> </column>
-            <column name="address1" type="varchar(200)" defaultValue=""><constraints nullable="false"/> </column>
-            <column name="address2" type="varchar(200)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="email" type="varchar(255)"><constraints nullable="false" primaryKey="true" primaryKeyName="pk_auth_user"/> </column>
+            <column name="password_hash" type="varchar(1000)"><constraints nullable="false"/> </column>
+            <column name="salt" type="varchar(1000)"><constraints nullable="false"/> </column>
+            <column name="token" type="varchar(1000)"><constraints nullable="false"/> </column>
+            <column name="first_name" type="varchar(50)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="last_name" type="varchar(50)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="title" type="varchar(50)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="address1" type="varchar(100)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="address2" type="varchar(100)" defaultValue=""><constraints nullable="false"/> </column>
             <column name="city" type="varchar(50)" defaultValue=""><constraints nullable="false"/> </column>
             <column name="state" type="char(2)" defaultValue=""><constraints nullable="false"/> </column>
             <column name="zipcode" type="varchar(10)" defaultValue=""><constraints nullable="false"/> </column>
-            <column name="timezone" type="varchar(100)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="timezone" type="varchar(50)" defaultValue=""><constraints nullable="false"/> </column>
             <column name="is_password_change_required" type="bit(1)" defaultValueBoolean="0"><constraints nullable="false"/> </column>
             <column name="is_locked" type="bit(1)" defaultValueBoolean="0"><constraints nullable="false"/> </column>
             <column name="login_attempts" type="integer" defaultValueNumeric="0"><constraints nullable="false"/> </column>
             <column name="last_login" type="datetime" defaultValueComputed="now()"><constraints nullable="false"/> </column>
             <column name="secret32" type="varchar(200)" defaultValue=""><constraints nullable="false"/> </column>
             <column name="is_mfa_exempt" type="bit(1)" defaultValueBoolean="false"><constraints nullable="false"/> </column>
+            <column name="created" type="datetime" defaultValueComputed="now()"><constraints nullable="false"/> </column>
+            <column name="created_by" type="varchar(255)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="updated" type="datetime" defaultValueComputed="now()"><constraints nullable="false"/> </column>
+            <column name="updated_by" type="varchar(255)" defaultValue=""><constraints nullable="false"/> </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>
