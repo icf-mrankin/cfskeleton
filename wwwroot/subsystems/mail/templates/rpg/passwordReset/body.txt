@@ -1,0 +1,19 @@
+NCSACW Communication Central Password Reset
+--------------------------------------------------------------------------------
+
+Please use the following link to reset and/or unlock your password.
+
+{resetLink}
+
+Depending on your email progam, you may be able to click on it
+or you may have to copy and paste it to your borwser's location bar.
+You can only use the link one time.  
+
+If you need another link, go back to 
+
+{passwordResetURL} 
+
+and fill out the form again.
+--------------------------------------------------------------------------------
+This message was sent from an outbound-only server.
+Please do not respond directly to this message.

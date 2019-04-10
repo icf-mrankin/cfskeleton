@@ -32,8 +32,8 @@ module.exports = merge(common, {
 					use: [{
 						loader: 'file-loader',
 						options: {
+							outputpath: 'static',
 							name: '[name].[ext]',
-							publicPath: '/static'
 						}
 					}]
 				}

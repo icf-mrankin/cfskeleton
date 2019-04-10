@@ -80,7 +80,7 @@
 </div>
 
 <div class="row mt-3">
-	<div class="col-md-8">
+	<div class="col-md-12">
 		<div class="card-deck">
 			<div class="card">
 				<div class="card-header">
@@ -98,6 +98,16 @@
 					<p>We use a local tool to debug system generated emails.  You never have to worry about accidently spamming
 					a list of clients with your tests.</p>
 					<p>	<a href="http://localhost:1080" target="_blank">MailCatcher</a></p>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header">
+					<p class="h4">Mail Subsystem</p>
+				</div>
+				<div class="card-body">
+					<p>We have a place to code and test your system generated email messages.</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
