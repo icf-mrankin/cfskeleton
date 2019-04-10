@@ -48,7 +48,8 @@ component extends="framework.one"
 		password = "true",
 		home = ":main.default",
 		error = "main.error",
-		unhandledErrorCaught = "true"
+		unhandledErrorCaught = "true",
+		trace="false"
 	};
 
 	// framework 1 config variables that can differ per environemnt

@@ -3,6 +3,8 @@ import 'bootstrap';
 import 'inputmask'; 
  
 import '../sass/app.scss'; 
+
+import img from '../images/logo.jpg';
  
 const Inputmask = require('inputmask'); 
  

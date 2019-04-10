@@ -8,6 +8,16 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.(png|jpg|gif)$/,
+				use: [{
+						loader: 'file-loader',
+						options: {
+							outputpath: 'static',
+							name: '[name].[ext]'
+						}
+				}]
+			},
+			{
 				test: require.resolve('jquery'),
 				use: [{
 					loader: 'expose-loader',
