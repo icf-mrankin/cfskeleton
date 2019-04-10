@@ -5,6 +5,30 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet id="1" author="mrankin">
+        <createTable tableName="auth_group">
+            <column name="id" type="integer" autoIncrement="true"><constraints nullable="false" primaryKeyName="pk_auth_group" primaryKey="true"/> </column>
+            <column name="owner" type="varchar(255)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="name" type="varchar(200)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="description" type="varchar(500)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="is_system" type="bit(1)" defaultValueBoolean="false"><constraints nullable="false"/> </column>
+            <column name="created" type="datetime" defaultValueComputed="now()"><constraints nullable="false"/> </column>
+            <column name="created_by" type="varchar(255)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="updated" type="datetime" defaultValueComputed="now()"><constraints nullable="false"/> </column>
+            <column name="updated_by" type="varchar(255)" defaultValue=""><constraints nullable="false"/> </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="mrankin">
+        <createTable tableName="auth_policy">
+            <column name="name" type="varchar(200)"><constraints nullable="false" primaryKey="true" primaryKeyName="pk_auth_policy"/> </column>
+            <column name="description" type="varchar(500)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="is_system" type="bit(1)" defaultValueBoolean="false"><constraints nullable="false"/> </column>
+            <column name="created" type="datetime" defaultValueComputed="now()"><constraints nullable="false"/> </column>
+            <column name="created_by" type="varchar(255)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="updated" type="datetime" defaultValueComputed="now()"><constraints nullable="false"/> </column>
+            <column name="updated_by" type="varchar(255)" defaultValue=""><constraints nullable="false"/> </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="mrankin">
         <createTable tableName="auth_user">
             <column name="email" type="varchar(255)"><constraints nullable="false" primaryKey="true" primaryKeyName="pk_auth_user"/> </column>
             <column name="password_hash" type="varchar(1000)"><constraints nullable="false"/> </column>
@@ -31,4 +55,103 @@
             <column name="updated_by" type="varchar(255)" defaultValue=""><constraints nullable="false"/> </column>
         </createTable>
     </changeSet>
+    <changeSet id="4" author="mrankin">
+        <createTable tableName="auth_group_policy">
+            <column name="policy_name" type="varchar(200)"><constraints nullable="false"/> </column>
+            <column name="group_id" type="integer"><constraints nullable="false"/> </column>
+        </createTable>
+        <addPrimaryKey tableName="auth_group_policy" columnNames="policy_name,group_id"/>
+    </changeSet>
+    <changeSet id="5" author="mrankin">
+        <createTable tableName="auth_password_history">
+            <column name="id" type="integer" autoIncrement="true"><constraints nullable="false" primaryKeyName="pk_auth_password_history" primaryKey="true"/> </column>
+            <column name="email" type="varchar(255)"><constraints nullable="false"/> </column>
+            <column name="password_hash" type="varchar(1000)"><constraints nullable="false"/> </column>
+            <column name="salt" type="varchar(1000)"><constraints nullable="false"/> </column>
+            <column name="created" type="datetime" defaultValueComputed="now()"><constraints nullable="false"/> </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="6" author="mrankin">
+        <createTable tableName="auth_user_group">
+            <column name="email" type="varchar(255)"><constraints nullable="false"/> </column>
+            <column name="group_id" type="integer"><constraints nullable="false"/> </column>
+        </createTable>
+        <addPrimaryKey tableName="auth_user_group" columnNames="email,group_id"/>
+    </changeSet>
+    <changeSet id="7" author="mrankin">
+        <createTable tableName="auth_user_policy">
+            <column name="email" type="varchar(255)"><constraints nullable="false"/> </column>
+            <column name="policy_name" type="varchar(200)"><constraints nullable="false"/> </column>
+        </createTable>
+        <addPrimaryKey tableName="auth_user_policy" columnNames="email,policy_name"/>
+    </changeSet>
+    <changeSet id="8" author="mrankin">
+        <addForeignKeyConstraint
+                baseTableName="auth_group_policy"
+                baseColumnNames="policy_name"
+                constraintName="fk_auth_group_policy__auth_policy"
+                referencedTableName="auth_policy"
+                referencedColumnNames="name"
+                onDelete="CASCADE" onUpdate="CASCADE"/>
+        <addForeignKeyConstraint
+                baseTableName="auth_group_policy"
+                baseColumnNames="group_id"
+                constraintName="fk_auth_group_policy__auth_group"
+                referencedTableName="auth_group"
+                referencedColumnNames="id"
+                onUpdate="CASCADE" onDelete="CASCADE"/>
+    </changeSet>
+    <changeSet id="9" author="mrankin">
+        <addForeignKeyConstraint
+                baseTableName="auth_password_history"
+                baseColumnNames="email"
+                constraintName="fk_auth_password_history__auth_user"
+                referencedTableName="auth_user"
+                referencedColumnNames="email"
+                onDelete="CASCADE" onUpdate="CASCADE"/>
+    </changeSet>
+    <changeSet id="10" author="mrankin">
+        <addForeignKeyConstraint
+                baseTableName="auth_user_group"
+                baseColumnNames="email"
+                constraintName="fk_auth_user_group__auth_user"
+                referencedTableName="auth_user"
+                referencedColumnNames="email"
+                onUpdate="CASCADE" onDelete="CASCADE"/>
+    </changeSet>
+    <changeSet id="11" author="mrankin">
+        <addForeignKeyConstraint
+                baseTableName="auth_user_policy"
+                baseColumnNames="email"
+                constraintName="fk_auth_user_policy__auth_user"
+                referencedTableName="auth_user"
+                referencedColumnNames="email"
+                onDelete="CASCADE" onUpdate="CASCADE"/>
+        <addForeignKeyConstraint
+                baseTableName="auth_user_policy"
+                baseColumnNames="policy_name"
+                constraintName="fk_auth_user_policy__auth_policy"
+                referencedTableName="auth_policy"
+                referencedColumnNames="name"
+                onUpdate="CASCADE" onDelete="CASCADE"/>
+    </changeSet>
+    <changeSet id="12" author="mrankin">
+        <sql>
+            <![CDATA[
+insert into auth_policy (name, description, is_system) values
+    ('sysadminFull', 'System Administrator Access', 1);
+
+insert into auth_group (name, description, is_system) values
+('sysadmins','System Administrators',1);
+
+insert into auth_group_policy (policy_name, group_id) VALUES
+('sysadminFull',1);
+            ]]>
+        </sql>
+        <rollback>
+            DELETE FROM auth_policy;
+            DELETE from auth_group;
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>
