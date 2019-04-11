@@ -1,0 +1,19 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="1" author="mrankin">
+        <createTable tableName="event_log">
+            <column name="id" type="integer" autoIncrement="true"><constraints nullable="false" primaryKeyName="pk_event_log" primaryKey="true"/> </column>
+            <column name="created" type="datetime" defaultValueComputed="now()"><constraints nullable="false"/> </column>
+            <column name="email" type="varchar(255)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="filter" type="varchar(200)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="action" type="varchar(200)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="event" type="varchar(200)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="severity" type="varchar(200)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="detail" type="varchar(200)" defaultValue=""><constraints nullable="false"/> </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

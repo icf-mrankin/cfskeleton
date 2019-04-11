@@ -12,6 +12,8 @@ component extends="base"
 		}
 		catch (any e)
 		{
+			writedump(e);
+			abort;
 			rc.message = new model.beans.message(type="danger", message=e.message);
 			fw.redirect(action='auth:main.login', preserve="all");
 		}
@@ -47,7 +49,7 @@ component extends="base"
 			// 	);
 			// 	fw.redirect(action='auth:main.login', preserve='all');
 			// }
-			if (user.getLocked_yn())
+			if (user.getIs_Locked())
 			{
 				// log event
 				var log = entityNew('EventLog',{
@@ -66,7 +68,7 @@ component extends="base"
 					);
 				fw.redirect(action='auth:main.login', preserve="all");
 			}
-			if (user.getPassword_change_required_yn())
+			if (user.getIs_password_change_required())
 			{
 				// log event
 				var log = entityNew('EventLog',{
@@ -78,7 +80,7 @@ component extends="base"
 					detail=''
 				});
 				entitySave(log);
-				rc.token_txt = user.getToken_txt();
+				rc.token = user.getToken();
 				rc.message = new model.beans.message(
 					type="info",
 					message="Please update your password. In some cases the minimum requirements have changed.");
@@ -89,9 +91,9 @@ component extends="base"
 			// check the password
 			isLoggedIn = variables.saltAndHashService.validateHashedString(
 				stringToBeHashed = rc.password,
-				salt = user.getSalt_txt(),
+				salt = user.getSalt(),
 		        hashMethod = 512,
-				hashedString = user.getPassword_hash_txt()
+				hashedString = user.getPassword_hash()
 			);
 			if (isLoggedIn) 
 			{
@@ -105,7 +107,7 @@ component extends="base"
 					detail=''
 				});
 				entitySave(log);
-				if (user.getMfa_exempt_yn() OR isDefined('cookie.MAS'))
+				if (user.getIs_mfa_exempt() OR isDefined('cookie.MAS'))
 				{
 					// log event
 					var log = entityNew('EventLog',{
@@ -120,7 +122,7 @@ component extends="base"
 					cookie name="email" value=user.getEmail() httpOnly="true" secure="false";
 					//session.email = user.getEmail();
 					
-					user.setLast_login_dtm(dateConvert('local2UTC',now()));
+					user.setLast_login(dateConvert('local2UTC',now()));
 					user.setLogin_attempts(0);
 					ORMFlush();
 					fw.redirect(action=':main.default', preserve="all");
@@ -150,7 +152,7 @@ component extends="base"
 				user.setLogin_attempts(user.getLogin_attempts() + 1);
 				if (user.getLogin_attempts() gte 5)
 				{
-					user.setLocked_yn(true);
+					user.setIs_locked(true);
 				}
 				ORMFlush();
 				rc.message.addControl(id="email", type="warning");
@@ -523,57 +525,6 @@ public void function changePasswordAct(struct rc)
  			fw.redirect(action='auth:main.checkOTP', preserve="all");
  		}
  	}
-
-
-// ONLY EXECUTE TO MIGRATE EXISTING ACCOUNTS ONCE
-
- 	/* public void function migrate(struct rc)
- 	{
- 		rc.userAry = [];
- 		rc.olduserQry = queryExecute("select * from auth.user_import");
- 		for (ou in rc.olduserQry)
- 		{	
- 			var pwd = Decrypt(ToString(BinaryDecode(ou.password, "base64")), "plokjgf68t3-o009ty57g poiaq40","CFMX_COMPAT");
-
- 			var hashStruct = variables.saltAndHashService.saltAndHash(stringToBeHashed = pwd, hashMethod = 512);
-
- 			u = entityLoadByPk('User', lcase(ou.email));
- 			if (!IsDefined("u"))
- 			{
- 				u = entityNew('User');
- 				u.setEmail(ou.email);
- 				entitySave(u);
- 			}
- 			u.setToken(pwd);
- 			u.setPasswordHash(hashStruct.hashedString);
- 			u.setSalt(hashStruct.salt);
- 			u.setFirstName(ou.firstName);
- 			u.setLastName(ou.lastName);
- 			u.setContactId(ou.contactId);
- 			u.setTitle(ou.title);
- 			u.setAddress1(ou.address1);
- 			u.setAddress2(ou.address2);
- 			u.setCity(ou.city);
- 			u.setState(ou.state);
- 			u.setZipcode(ou.zipcode);
- 			u.setSecondaryEmail(ou.secondaryEmail);
- 			u.setBusinessPhone(ou.businessPhone);
- 			u.setHomePhone(ou.homePhone);
- 			u.setMobilePhone(ou.mobilePhone);
- 			u.setCreated(parseDateTime(ou.dateCreated));
- 			u.setIsPrivate(ou.isPrivate);
- 			u.setIsStaff(ou.isStaff);
- 			u.setOrganizationId(ou.organizationId);
- 			u.setUserTypeId(ou.userTypeId);
- 			u.setSubOrg(ou.subOrg);
- 			u.setPhoto(ou.photo);
- 			u.setTimezone(ou.timezone);
- 			u.setIsLocked(0);
-
- 			ORMFlush();
- 		}
- 		rc.users = entityLoad('User');
- 	} */
 
 
 

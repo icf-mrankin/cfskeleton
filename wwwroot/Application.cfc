@@ -44,11 +44,11 @@ component extends="framework.one"
 		subsystemDelimiter = ":",
 		cacheFileExists = false,
 		applicationKey = "framework.one",
-		reload = "reloadd",
+		reload = "reload",
 		password = "true",
 		home = ":main.default",
-		error = "main.error",
-		unhandledErrorCaught = "true",
+		//error = "main.error",
+		unhandledErrorCaught = "false",
 		trace="false"
 	};
 
@@ -73,6 +73,22 @@ component extends="framework.one"
 		} else {
 			throw("Environment not found.");
 		}
+	}
+
+	public void function setupApplication()
+	{
+		// load application information
+	}
+
+	public void function setupSession()
+	{
+		// initialize session settings (I try not to need this)
+	}
+
+	public void function setupRequest()
+	{
+		if (structKeyExists(URL,'orm')) ormReload();
+		if (structKeyExists(URL,'appreset')) ApplicationStop();
 	}
 
 }

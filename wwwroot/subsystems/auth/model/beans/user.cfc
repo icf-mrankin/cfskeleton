@@ -1,39 +1,28 @@
 component entityname="User" persistent="true" accessors="true" table="auth_user"
 {
 	property name="email" fieldtype="id" generator="assigned" type="string" ormType="string" sqlType="varchar(255)";
-	property name="organization_id";
-	property name="password_hash_txt";
-	property name="salt_txt";
-	property name="token_txt";
+	property name="password_hash";
+	property name="salt";
+	property name="token";
 	property name="first_name";
 	property name="last_name";
-	property name="contact_id";
 	property name="title";
 	property name="address1";
 	property name="address2";
 	property name="city";
 	property name="state";
 	property name="zipcode";
-	property name="secondary_email";
-	property name="business_phone";
-	property name="home_phone";
-	property name="mobile_phone";
-	property name="created_dtm";
+	property name="created";
 	property name="created_by";
-	property name="updated_dtm";
+	property name="updated";
 	property name="updated_by";
-	property name="private_yn";
-	property name="staff_yn";	
-	property name="user_type_id";
-	property name="sub_org";
-	property name="photo";
 	property name="timezone";
-	property name="password_change_required_yn";
-	property name="locked_yn";
+	property name="is_password_change_required";
+	property name="is_locked";
 	property name="login_attempts";
-	property name="last_login_dtm";
+	property name="last_login";
 	property name="secret32";
-	property name="mfa_exempt_yn" type="boolean";
+	property name="is_mfa_exempt" type="boolean";
 
 
 	// relationships
@@ -49,75 +38,55 @@ component entityname="User" persistent="true" accessors="true" table="auth_user"
 
 	public User function init(
 		string email = '',
-		string password_hash_txt = '',
-		string salt_txt = '',
-		string token_txt = '',
+		string password_hash = '',
+		string salt = '',
+		string token = '',
 		string first_name = '',
 		string last_name = '',
-		numeric contact_id = 0,
 		string title = '',
 		string address1 = '',
 		string address2 = '',
 		string city = '',
 		string state = '',
 		string zipCode = '',
-		string secondary_email = '',
-		string business_phone = '',
-		string home_phone = '',
-		string mobile_phone = '',
-		date created_dtm = now(),
+		date created = now(),
 		string created_by = '',
-		date updated_dtm = now(),
+		date updated = now(),
 		string updated_by = '',
-		boolean private_yn = false,
-		boolean staff_yn = true,
-		numeric organization_id = 0,
-		numeric user_type_id = 0,
-		string sub_org = '',
-		string photo = '',
+		boolean is_staff = true,
 		string timezone = '',
-		boolean password_change_required_yn = true,
-		boolean locked_yn = false,
+		boolean is_password_change_required = true,
+		boolean is_locked = false,
 		numeric login_attempts = 0,
-		date last_login_dtm = now(),
+		date last_login = now(),
 		string secret32 = '',
-		boolean mfa_exempt_yn = false	
+		boolean is_mfa_exempt = false	
 	)
 	{
 		setEmail(arguments.email);
-		setPassword_hash_txt(arguments.password_hash_txt);
-		setSalt_txt(arguments.salt_txt);
-		setToken_txt(arguments.token_txt);
+		setPassword_hash(arguments.password_hash);
+		setSalt(arguments.salt);
+		setToken(arguments.token);
 		setFirst_Name(arguments.first_name);
 		setLast_Name(arguments.last_name);
-		setContact_Id(arguments.contact_id);
 		setTitle(arguments.title);
 		setAddress1(arguments.address1);
 		setAddress2(arguments.address2);
 		setCity(arguments.city);
 		setState(arguments.state);
 		setZipCode(arguments.ZipCode);
-		setSecondary_Email(arguments.secondary_email);
-		setBusiness_Phone(arguments.business_phone);
-		setHome_Phone(arguments.home_phone);
-		setMobile_Phone(arguments.mobile_phone);
-		setCreated_dtm(arguments.created_dtm);
+		setCreated(arguments.created);
 		setCreated_by(arguments.created_by);
-		setUpdated_dtm(arguments.updated_dtm);
+		setUpdated(arguments.updated);
 		setUpdated_by(arguments.updated_by);
-		setPrivate_yn(arguments.private_yn);
-		setStaff_yn(arguments.staff_yn);
-		setOrganization_id(arguments.organization_id);
-		setUser_type_id(arguments.user_type_id);
-		setSub_org(arguments.sub_org);
-		setphoto(arguments.photo);
+		setIs_Staff(arguments.is_staff);
 		setTimezone(arguments.timezone);
-		setPassword_change_required_yn(arguments.password_change_required_yn);
-		setLocked_yn(arguments.locked_yn);
+		setIs_password_change_required(arguments.is_password_change_required);
+		setIs_Locked(arguments.is_locked);
 		setLogin_attempts(arguments.login_attempts);
-		setLast_login_dtm(arguments.last_login_dtm);	
+		setLast_login(arguments.last_login);	
 		setSecret32(arguments.secret32);
-		setMfa_exempt_yn(arguments.mfa_exempt_yn);
+		setIs_Mfa_exempt(arguments.mfa_exempt);
 
 		variables.ownedGroups = [];
 		variables.groups = [];
