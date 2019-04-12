@@ -1,24 +1,33 @@
 component entityname="Policy" persistent="true" accessors="true" table="auth_policy" 
 {
-	property name="name_sn" fieldtype="id" generator="assigned" type="string" ormType="string" sqlType="varchar(255)";
+	property name="name" fieldtype="id" generator="assigned" type="string" ormType="string" sqlType="varchar(255)";
 	property name="description" type="string";
-	property name="system_yn" type="boolean";
-	property name="created_dtm" type="date";
+	property name="is_system" type="boolean";
+	property name="created" type="date";
+	property name="created_by" type="string";
+	property name="updated" type="date";
+	property name="updated_by" type="string";
 
 	// relationships	
-	property name="groups" fieldtype="many-to-many" cfc="Group" type="array" singularname="group" orderby="name asc" linktable="auth_group_policy" fkcolumn="policy_name_sn" inversejoincolumn="group_id" lazy="extra";
+	property name="groups" fieldtype="many-to-many" cfc="Group" type="array" singularname="group" orderby="name asc" linktable="auth_group_policy" fkcolumn="policy_name" inversejoincolumn="group_id" lazy="extra";
 
 	public Policy function init(
-		string name_sn = '',
+		string name = '',
 		string description = '',
-		string system_yn = false,
-		date created_dtm = now()
+		string is_system = false,
+		date created = now(),
+		string created_by = '',
+		date updated = now(),
+		string updated_by = ''
 	)
 	{
-		setName_sn(arguments.name_sn);
+		setName(arguments.name);
 		setDescription(arguments.description);
-		setSystem_yn(arguments.system_yn);
-		setCreated_dtm(arguments.created_dtm);
+		setIs_system(arguments.is_system);
+		setCreated(arguments.created);
+		setCreated_by(arguments.created_by);
+		setUpdated(arguments.updated);
+		setUpdated_by(arguments.updated_by);
 
 		return this;
 	}

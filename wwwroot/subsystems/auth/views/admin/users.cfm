@@ -16,10 +16,10 @@
 	</script>
 	
 	<div class="row">
-		<div class="col-sm-3 col-md-2">
+		<div class="col-sm-3 col-md-2 mt-3">
 			#view('auth:admin/pills')#
 		</div>
-		<div class="col-sm-9 col-md-10">
+		<div class="col-sm-9 col-md-10 mt-3">
 			<div class="row">
 				<div class="col-sm-12">
 					<button class="btn btn-primary" type="button" id="newUserBtn">Create New User</button>
@@ -38,11 +38,11 @@
 						</thead>
 						<tbody>
 							<cfloop array="#rc.users#" index="user">
-								<tr class="user #(!user.getStaff_yn())?'table-warning':''#" data-email="#encodeForURL(user.getEmail())#">
+								<tr class="user data-email="#encodeForURL(user.getEmail())#">
 									<td>#user.getLast_Name()#, #user.getFirst_Name()#</td>
 									<td>#user.getEmail()#</td>
 									<td>#user.getTimeZone()#</td>
-									<td>#dateFormat(user.getlast_login_dtm(), 'mm/dd/yyyy')#</td>
+									<td>#dateFormat(user.getlast_login(), 'mm/dd/yyyy')#</td>
 								</tr>
 							</cfloop>
 						</tbody>

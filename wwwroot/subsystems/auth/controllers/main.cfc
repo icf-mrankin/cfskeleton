@@ -64,7 +64,7 @@ component extends="base"
 				rc.message = new model.beans.message(
 					type="danger",
 					message="This account is currently locked. Please contact an {link}administrator{/link} for additional assistance.",
-					link="mailto:rkilian@icf.com?subject=" & encodeForHTML(fw.getConfig().sitebrand & " login assistance") & "&body=" & encodeForHTML("My account using [" & rc.email & "] has been locked.  Please advise." ) 
+					link="mailto:rkilian@icf.com?subject=" & encodeForHTML("sitebrand" & " login assistance") & "&body=" & encodeForHTML("My account using [" & rc.email & "] has been locked.  Please advise." ) 
 					);
 				fw.redirect(action='auth:main.login', preserve="all");
 			}
@@ -525,8 +525,6 @@ public void function changePasswordAct(struct rc)
  			fw.redirect(action='auth:main.checkOTP', preserve="all");
  		}
  	}
-
-
 
 
 }

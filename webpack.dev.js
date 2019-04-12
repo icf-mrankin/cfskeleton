@@ -18,9 +18,9 @@ module.exports = merge(common, {
             filename: '[name].js', 
         }, 
     plugins: [
-	    new CleanWebpackPlugin({
-				//dry: true
-			}),
+	  //   new CleanWebpackPlugin({
+			// 	//dry: true
+			// }),
 			new MiniCssExtractPlugin({
 				filename: '[name].css'
 			})
@@ -32,8 +32,9 @@ module.exports = merge(common, {
 					use: [{
 						loader: 'file-loader',
 						options: {
-							outputpath: 'static',
 							name: '[name].[ext]',
+							outputPath: '',
+							publicPath: '/static'
 						}
 					}]
 				}

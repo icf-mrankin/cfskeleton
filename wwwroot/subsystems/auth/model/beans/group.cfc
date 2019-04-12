@@ -3,9 +3,12 @@ component entityname="Group" persistent="true" accessors="true" table="auth_grou
 	property name="id" fieldtype="id" generator="identity" type="numeric" ormType="integer" sqltype="int";
 	property name="name" type="string" sqlType="varchar(255)";
 	property name="owner" type="string";
-	property name="description_ln" type="string";
-	property name="system_yn" type="boolean";
-	property name="created_dtm" type="date";
+	property name="description" type="string";
+	property name="is_system" type="boolean";
+	property name="created" type="date";
+	property name="created_by" type="string";
+	property name="updated" type="date";
+	property name="updated_by" type="string";
 
 	// relationships
 	// one owner can have many groups
@@ -13,21 +16,27 @@ component entityname="Group" persistent="true" accessors="true" table="auth_grou
 	// many groups can have many users
 	property name="users" fieldtype="many-to-many" cfc="User" type="array" singularname="user" orderby="last_name asc, first_name asc" linktable="auth_user_group" fkcolumn="group_id" inversejoincolumn="email" inverse="true";
 	// many groups can have many policies
-	property name="policies" fieldtype="many-to-many" cfc="Policy" type="array" singularname="policy" orderby="name_sn" linktable="auth_group_policy" fkcolumn="group_id" inversejoincolumn="policy_name_sn" inverse="true";
+	property name="policies" fieldtype="many-to-many" cfc="Policy" type="array" singularname="policy" orderby="name" linktable="auth_group_policy" fkcolumn="group_id" inversejoincolumn="policy_name" inverse="true";
 
 	public Group function init(
 		string name = '',
 		string owner = '',
-		string description_ln = '',
-		string system_yn = false,
-		date created_dtm = now()
+		string description = '',
+		string is_system = false,
+		date created = now(),
+		string created_by = '',
+		date updated = now(),
+		string updated_by = ''
 	)
 	{
 		setName(arguments.name);
 		setOwner(arguments.owner);
-		setDescription_ln(arguments.description_ln);
-		setSystem_yn(arguments.system_yn);
-		setCreated_dtm(arguments.created_dtm);
+		setDescription(arguments.description);
+		setIs_system(arguments.is_system);
+		setCreated(arguments.created);
+		setCreated_by(arguments.created_by);
+		setUpdated(arguments.updated);
+		setUpdated_by(arguments.updated_by);
 
 		return this;
 	}

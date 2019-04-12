@@ -34,7 +34,7 @@ component entityname="User" persistent="true" accessors="true" table="auth_user"
 	property name="groups" fieldtype="many-to-many" cfc="Group" type="array" singularname="group" orderby="name asc" linktable="auth_user_group" fkcolumn="email" inversejoincolumn="group_id";
 
 	// many users can belong to many user_policy s
-	property name="policies" fieldtype="many-to-many" cfc="Policy" type="array" singularname="policy" orderby="name_sn" linktable="auth_user_policy" fkcolumn="email" inversejoincolumn="policy_name_sn" inverse="true";
+	property name="policies" fieldtype="many-to-many" cfc="Policy" type="array" singularname="policy" orderby="name" linktable="auth_user_policy" fkcolumn="email" inversejoincolumn="policy_name" inverse="true";
 
 	public User function init(
 		string email = '',
@@ -79,14 +79,13 @@ component entityname="User" persistent="true" accessors="true" table="auth_user"
 		setCreated_by(arguments.created_by);
 		setUpdated(arguments.updated);
 		setUpdated_by(arguments.updated_by);
-		setIs_Staff(arguments.is_staff);
 		setTimezone(arguments.timezone);
 		setIs_password_change_required(arguments.is_password_change_required);
 		setIs_Locked(arguments.is_locked);
 		setLogin_attempts(arguments.login_attempts);
 		setLast_login(arguments.last_login);	
 		setSecret32(arguments.secret32);
-		setIs_Mfa_exempt(arguments.mfa_exempt);
+		setIs_Mfa_exempt(arguments.is_mfa_exempt);
 
 		variables.ownedGroups = [];
 		variables.groups = [];

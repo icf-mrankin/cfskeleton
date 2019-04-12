@@ -16,4 +16,25 @@
             <column name="detail" type="varchar(200)" defaultValue=""><constraints nullable="false"/> </column>
         </createTable>
     </changeSet>
+    <changeSet id="2" author="mrankin">
+        <sql>
+            <![CDATA[
+insert into auth_user (email, password_hash, salt, first_name, last_name, title, is_mfa_exempt)
+values ('superuser@example.com',
+        '1E1375E0D1190E5DC9E4A012B7A62433E947DF88FAB236B4283D1C85AC279B03929F254D926F3BE4F76857CC5134EFFB156308932F26F0F7EE891D6FB0849ECE',
+        'u2^tdbj@6~zgrm@@~3@096p@$d4@^m59kg9^7j4@p^',
+        'Super',
+        'User',
+        'System Administrator',
+        1);
+            ]]>
+        </sql>
+    </changeSet>
+    <changeSet id="3" author="mrankin">
+        <sql>
+            <![CDATA[
+insert into auth_user_group (email, group_id) VALUES ('superuser@example.com',1)
+            ]]>
+        </sql>
+    </changeSet>
 </databaseChangeLog>
