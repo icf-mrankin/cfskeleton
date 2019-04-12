@@ -5,6 +5,9 @@ import 'inputmask';
 import '../sass/app.scss'; 
 
 import img from '../images/logo.jpg';
+import img2 from '../images/get-it-from-MS.png';
+import img3 from '../images/googleplay.svg';
+import img4 from '../images/ios-app-store.svg';
  
 const Inputmask = require('inputmask'); 
  

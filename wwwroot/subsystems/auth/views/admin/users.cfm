@@ -27,7 +27,7 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12 mt-3">
-					<table id="userTbl" class="table table-hover">
+					<table id="userTbl" class="table table-hover table-sm">
 						<thead class="thead-inverse">
 							<tr>
 								<th>Name</th>

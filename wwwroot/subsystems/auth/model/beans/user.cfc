@@ -17,7 +17,7 @@ component entityname="User" persistent="true" accessors="true" table="auth_user"
 	property name="updated";
 	property name="updated_by";
 	property name="timezone";
-	property name="is_password_change_required";
+	property name="is_password_change_required" type="boolean";
 	property name="is_locked";
 	property name="login_attempts";
 	property name="last_login";

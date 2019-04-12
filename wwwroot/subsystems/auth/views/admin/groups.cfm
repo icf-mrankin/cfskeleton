@@ -54,10 +54,10 @@
 		});
 	</script>
 	<div class="row">
-		<div class="col-sm-3 col-md-2">
+		<div class="col-sm-3 col-md-2 mt-3">
 			#view('auth:admin/pills')#
 		</div>
-		<div class="col-sm-9 col-md-10">
+		<div class="col-sm-9 col-md-10 mt-3">
 			<div class="row">
 				<div class="col-sm-12">
 						<button class="btn btn-primary newGroup" type="button">Create New Group</button>
@@ -78,7 +78,7 @@
 			<div class="row">
 				<div class="col-sm-12 pt-1">
 					<form id="groupFrm" method="post" action="">
-						<table class="table table-hover table-sm">
+						<table class="table table-hover mt-3 table-sm">
 							<thead class="thead-inverse">
 								<tr>
 									<th></th>
@@ -94,22 +94,21 @@
 								<cfloop array="#rc.groups#" index="group">
 									<tr>
 										<td>
-											<div class="form-check">
-												<label class="form-check-label">
-													<input class="form-check-input chk" name="id" type="checkbox" value="#group.getId()#"/>
-												</label>
+											<div class="custom-control custom-checkbox">
+												<input class="custom-control-input chk" name="id" id="#group.getId()#" type="checkbox" value="#group.getId()#"/>
+												<label class="custom-control-label" for="#group.getId()#"></label>
 											</div>
 										</td>
 										<td>#group.getName()#</td>
-										<td>#group.getDescription_ln()#</td>
+										<td>#group.getDescription()#</td>
 										<td>#arrayLen(group.getPolicies())#</td>
 										<td>#arrayLen(group.getUsers())#</td>
 										<td class="text-sm-center">
-											<cfif group.getSystem_yn()>
+											<cfif group.getIs_system()>
 												<span class="fas fa-check"></span>
 											</cfif>
 										</td>
-										<td>#dateFormat(group.getCreated_dtm(), "long")#</td>
+										<td>#dateFormat(group.getCreated(), "long")#</td>
 									</tr>
 								</cfloop>
 							</tbody>

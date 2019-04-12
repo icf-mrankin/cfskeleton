@@ -20,10 +20,10 @@
 	</script>
 
 	<div class="row">
-		<div class="col-sm-3 col-md-2">
+		<div class="col-sm-3 col-md-2 mt-3">
 			#view('auth:admin/pills')#
 		</div>
-		<div class="col-sm-9 col-md-10">
+		<div class="col-sm-9 col-md-10 mt-3">
 			<div class="row">
 				<div class="col-sm-12">
 					<button class="btn btn-primary" id="newPolicyBtn" type="button">Create New Policy</button>
@@ -31,7 +31,7 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12 pt-1">
-					<table class="table table-hover" id="policyTbl">
+					<table class="table table-hover table-sm mt-3" id="policyTbl">
 						<thead class="thead-inverse">
 							<tr>
 								<th>Name</th>
@@ -42,15 +42,15 @@
 						</thead>
 						<tbody>
 							<cfloop array="#rc.policies#" index="policy">
-								<tr class="policy" data-name="#policy.getName_sn()#">
-									<td>#policy.getName_sn()#</td>
+								<tr class="policy" data-name="#policy.getName()#">
+									<td>#policy.getName()#</td>
 									<td>#policy.getDescription()#</td>
 									<td class="text-sm-center">
-										<cfif policy.getSystem_yn()>
+										<cfif policy.getIs_system()>
 											<span class="fas fa-check"></span>
 										</cfif>
 									</td>
-									<td>#datetimeformat(policy.getCreated_dtm(), 'mm/dd/yyyy h:mm tt')#</td>
+									<td>#datetimeformat(policy.getCreated(), 'mm/dd/yyyy h:mm tt')#</td>
 								</tr>
 							</cfloop>
 						</tbody>

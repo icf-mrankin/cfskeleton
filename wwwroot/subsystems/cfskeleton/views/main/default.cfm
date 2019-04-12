@@ -108,6 +108,15 @@
 					<p>We have a place to code and test your system generated email messages.</p>
 				</div>
 			</div>
+			<div class="card">
+				<div class="card-header">
+					<p class="h4">S3</p>
+				</div>
+				<div class="card-body">
+					<p>An extensible AWS api library is included.  Setting up connections and encryption is already built
+						as well as the S3 interface.  Potentially, any of the AWS public api's can be used.
+					</p>
+				</div>
 		</div>
 	</div>
 </div>

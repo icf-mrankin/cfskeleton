@@ -33,6 +33,23 @@ component extends="framework.one"
 				dialect = 'MySQLwithInnoDB',
 				logSQL = 'true'
 			};
+			this.aws = {
+				accessKeyId: '',
+				awsSecretKey: '',
+				host: ''
+			};
+			this.mailservers = [
+				{
+					host: 'mailcatcher',
+					port: 1025,
+					username: '',
+					password: '',
+					ssl: false,
+					tls: false,
+					lifeTimespan: createTimeSpan(0,0,1,0),
+					idleTimespan: createTimeSpan(0,0,0,10)
+				}
+			];
 			break;
 		default: 
 			break;
@@ -58,7 +75,9 @@ component extends="framework.one"
 	// the variable must match the string returned from getEnvironment()
 	variables.framework.environments = {
 		localhost = {
-			reloadApplicationOnEveryRequest = true
+			reloadApplicationOnEveryRequest = true,
+			siteName = "",
+			siteBrand = "CFSkeleton"
 		}
 	}
 

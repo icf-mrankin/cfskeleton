@@ -443,7 +443,7 @@ public void function changePasswordAct(struct rc)
  		{
 			// session.email = user.getEmail();
 			cookie name="email" value=user.getEmail() httpOnly="true" secure="false";
-			user.setLast_login_dtm(now());
+			user.setLast_login(now());
 			user.setLogin_attempts(0);
 			ORMFlush();
 			// log event

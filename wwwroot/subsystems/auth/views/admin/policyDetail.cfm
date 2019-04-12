@@ -6,9 +6,9 @@
 				location.assign("#buildURL(action='auth:admin.policies')#");;
 			});	
 			$('##deleteBtn').click(function(){
-				if (confirm("Delete #rc.policy.getName_sn()#?"))
+				if (confirm("Delete #rc.policy.getName()#?"))
 				{
-					location.assign("#buildURL(action='auth:admin.policyDeleteAct', querystring={name=rc.policy.getName_sn()})#");
+					location.assign("#buildURL(action='auth:admin.policyDeleteAct', querystring={name=rc.policy.getName()})#");
 				}
 			});
 			$('##saveBtn').click(function(){
@@ -29,7 +29,7 @@
 				<div class="form-group row">
 					<label for="Name" class="col-sm-3 col-form-label">Name</label>
 					<div class="col-sm-9" id="name">
-						<input type="text" class="form-control" name="name_sn" placeholder="Name" value="#rc.policy.getName_sn()#">
+						<input type="text" class="form-control" name="name_sn" placeholder="Name" value="#rc.policy.getName()#">
 						<p class="help-block">Upper/lower case letters and number only.</p>
 					</div>
 				</div>
@@ -43,7 +43,7 @@
 					<div class="col-sm-9 offset-sm-3">
 						<div class="form-check">
 							<label class="form-check-label">
-								<input class="form-check-input" type="checkbox" name="system_yn" value="1" #(rc.policy.getSystem_yn())?"checked":""#> System
+								<input class="form-check-input" type="checkbox" name="system_yn" value="1" #(rc.policy.getIs_system())?"checked":""#> System
 							</label>
 						</div>
 					</div>

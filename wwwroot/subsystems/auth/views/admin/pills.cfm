@@ -3,6 +3,5 @@
 	<a href="#buildURL('auth:admin.users')#" class="nav-link #(left(getItem(),4) eq 'user')?'active':''#">Users</a>
 	<a href="#buildURL('auth:admin.groups')#" class="nav-link #(left(getItem(),5) eq 'group')?'active':''#">Groups</a>
 	<a href="#buildURL('auth:admin.policies')#" class="nav-link #(left(getItem(),5) eq 'polic')?'active':''#">Policies</a>
-	<a href="#buildURL('auth:admin.organizations')#" class="nav-link #(left(getItem(),3) eq 'org')?'active':''#">Organizations</a>
 </nav>
 </cfoutput>
