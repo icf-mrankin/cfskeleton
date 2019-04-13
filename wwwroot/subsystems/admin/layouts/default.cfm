@@ -1,5 +1,5 @@
 <cfoutput>
-	#view(cfskeleton:main/_navbar)#
+	#view('cfskeleton:main/_navbar')#
   <div class="container-fluid">
   	#body#
   </div>

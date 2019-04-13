@@ -37,4 +37,72 @@ insert into auth_user_group (email, group_id) VALUES ('superuser@example.com',1)
             ]]>
         </sql>
     </changeSet>
+    <changeSet id="4" author="mrankin">
+        <createTable tableName="us_state">
+            <column name="code" type="varchar(3)"><constraints nullable="false" primaryKey="true" primaryKeyName="pk_us_states"/> </column>
+            <column name="name" type="varchar(25)"><constraints nullable="false"/> </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="mrankin">
+        <sql>
+            <![CDATA[
+INSERT INTO us_state (code,name) VALUES
+('AL','Alabama'),
+('AK','Alaska'),
+('AZ','Arizona'),
+('AR','Arkansas'),
+('CA','California'),
+('CO','Colorado'),
+('CT','Connecticut'),
+('DE','Delaware'),
+('DC','District of Columbia'),
+('FL','Florida'),
+('GA','Georgia'),
+('HI','Hawaii'),
+('ID','Idaho'),
+('IL','Illinois'),
+('IN','Indiana'),
+('IA','Iowa'),
+('KS','Kansas'),
+('KY','Kentucky'),
+('LA','Louisiana'),
+('ME','Maine'),
+('MD','Maryland'),
+('MA','Massachusetts'),
+('MI','Michigan'),
+('MN','Minnesota'),
+('MS','Mississippi'),
+('MO','Missouri'),
+('MT','Montana'),
+('NE','Nebraska'),
+('NV','Nevadda'),
+('NH','New Hampshire'),
+('NJ','New Jersey'),
+('NM','New Mexico'),
+('NY','New York'),
+('NC','North Carolina'),
+('ND','North Dakota'),
+('OH','Ohio'),
+('OK','Oklahoma'),
+('OR','Oregon'),
+('PA','Pennsylvania'),
+('PR','Puerto Rico'),
+('RI','Rhode Island'),
+('SC','South Carolian'),
+('SD','South Dakota'),
+('TN','Tennessee'),
+('TX','Texas'),
+('UT','Utah'),
+('VT','Vermont'),
+('VA','Virginia'),
+('WA','Washington'),
+('WV','West Virginia'),
+('WI','Wisconsin'),
+('WY','Wyoming')
+            ]]>
+        </sql>
+        <rollback>
+            DELETE FROM us_state;
+        </rollback>
+    </changeSet>
 </databaseChangeLog>

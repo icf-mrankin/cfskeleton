@@ -3,7 +3,6 @@ component extends="base"
 { 
 	property saltAndHashService;
 	property twoService;
-	// timezone service initialized in base
 
 	public void function before(struct rc)
 	{
@@ -211,9 +210,7 @@ component extends="base"
 	{
 		param name='rc.email' default='';
 
-		rc.timezones = timezoneService.getTimeZones();
 		rc.states = entityLoad('State');
-		rc.organizations = entityLoad('Organization');
 		rc.person = entityLoadByPk('User', lcase(rc.email));		
 
 		if (!isDefined('rc.person'))
