@@ -110,7 +110,7 @@ component extends="base"
 			action=fw.getFullyQualifiedAction(),
 			event='group updated',
 			severity='info', //'info','warning','error','debug'
-			detail='Group description changed to: ' & rc.description_ln
+			detail='Group description changed to: ' & rc.description
 		});
 		entitySave(eventLog);
 		rc.message = new model.beans.message(
@@ -152,9 +152,8 @@ component extends="base"
 		arrayAppend(rc.breadcrumbs, {name="Edit Users"});
 
 		rc.users = queryExecute("
-			select u.email, u.first_name, u.last_name, u.title, o.name_ln as organization
+			select u.email, u.first_name, u.last_name, u.title
 			from auth_user u
-			left join auth_organization o on u.organization_id = o.id
 			order by last_name, first_name
 		");
 
@@ -229,11 +228,10 @@ component extends="base"
 
 	public void function userDetailAct(struct rc)
 	{
-		param name="rc.password_change_required_yn" default="0";
-		param name="rc.locked_yn" default="0";
-		param name="rc.staff_yn" default="0";
+		param name="rc.is_password_change_required" default="0";
+		param name="rc.is_locked" default="0";
 		param name="rc.code" default="0";
-		param name="rc.mfa_exempt_yn" default="0";
+		param name="rc.is_mfa_exempt" default="0";
 		var isNewPerson = false;
 
 		rc.person = entityLoadByPk('User', lcase(rc.email));
@@ -244,11 +242,11 @@ component extends="base"
 			isNewPerson = true;
 		}
 		fw.populate(rc.person);
-		if (!rc.person.getlocked_yn())
+		if (!rc.person.getIs_locked())
 		{
 			rc.person.setLogin_attempts(0);
 		}
-		if (rc.password_change_required_yn)
+		if (rc.is_password_change_required)
 		{
 			rc.person.generateToken();
 		}
@@ -256,9 +254,9 @@ component extends="base"
 		{
 			rc.person.setSecret32('');
 		}
-		if (rc.mfa_exempt_yn)
+		if (rc.is_mfa_exempt)
 		{
-			rc.person.setMfa_exempt_yn(1);
+			rc.person.setIs_mfa_exempt(1);
 		}
 		if (!refind("^[a-zA-Z0-9.!##$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$", rc.email))
 		{
@@ -272,68 +270,6 @@ component extends="base"
 		} else {
 			entitySave(rc.person);
 			/* this code should be removed when the old user table is removed */
-
-			var findContact = queryExecute("
-				select ID 
-				from contact
-					Where primary_email = '#trim(rc.person.getEmail())#'
-				");
-
-
-			if(findContact.recordcount == 0){
-
-			var contactResult = queryExecute("
-
-				INSERT INTO contact 
-					(first_name, 
-					last_name,
-					primary_email, 
-					created_dtm, 
-					created_by, 
-					updated_dtm, 
-					updated_by, 
-					private_yn, 
-					staff_yn)
-				VALUES 
-					(:firstname, 
-					:lastname,
-					:email, 
-					#now()#, 
-					:curUser, 
-					#now()#, 
-					:curUser, 
-					0, 
-					1);
-				", 
-				{firstname=rc.person.getfirst_name(), 
-				lastname=rc.person.getlast_name(), 
-				email=rc.person.getEmail(),
-				curUser=rc.user.getContact_id()});
-
-
-			    var findContact = queryExecute("
-				select ID 
-				from contact
-					Where primary_email = '#trim(rc.person.getEmail())#'
-				");
- 				if (isNewPerson)
-				{
-					rc.person.setContact_id(findContact.id);
-				}
-			}else{
-				var contactResult = queryExecute("
-					UPDATE contact
-						SET 
-						first_name = :firstname,
-						last_name = :lastname,
-						updated_dtm = #now()#,
-						updated_by = :curUser
-							WHERE primary_email = :email
-				", {firstname=rc.person.getfirst_name(), 
-					lastname=rc.person.getlast_name(), 
-					email=rc.person.getEmail(),
-					curUser=rc.user.getContact_id()});
-			}
 
 			/* ----------------------------------------------------------------*/
 			rc.message = new model.beans.message(

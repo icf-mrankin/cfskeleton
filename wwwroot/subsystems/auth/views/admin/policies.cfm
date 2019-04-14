@@ -20,10 +20,10 @@
 	</script>
 
 	<div class="row">
-		<div class="col-sm-3 col-md-2 mt-3">
+		<div class="col-sm-3 col-md-2">
 			#view('auth:admin/pills')#
 		</div>
-		<div class="col-sm-9 col-md-10 mt-3">
+		<div class="col-sm-9 col-md-10">
 			<div class="row">
 				<div class="col-sm-12">
 					<button class="btn btn-primary" id="newPolicyBtn" type="button">Create New Policy</button>

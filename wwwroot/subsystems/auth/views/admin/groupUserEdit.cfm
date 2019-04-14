@@ -34,26 +34,22 @@
 				<table class="table" id="userTbl">
 					<thead class="thead-inverse">
 						<tr>
-							<th></th>
 							<th>Name</th>
 							<th>Email</th>
 							<th>Title</th>
-							<th>Organziation</th>
 						</tr>
 					</thead>
 					<tbody>
 						<cfloop query="#rc.users#">
 							<tr>
 								<td>
-									<label class="custom-control custom-checkbox">
-	  									<input name="email" value="#EMAIL#" type="checkbox" #(listFind(rc.usersInGroup,email))?"checked":""# class="custom-control-input">
-	  									<span class="custom-control-indicator"></span>
-									</label>
+									<div class="custom-control custom-checkbox">
+	  									<input name="email" value="#EMAIL#" id="#email#" type="checkbox" #(listFind(rc.usersInGroup,email))?"checked":""# class="custom-control-input">
+	  									<label class="custom-control-label" for="#email#">#first_name# #last_name#</label>
+									</div>
 								</td>
-								<td>#first_name# #last_name#</td>
 								<td>#email#</td>
 								<td>#title#</td>
-								<td>#organization#</td>
 							</tr>
 						</cfloop>
 					</tbody>

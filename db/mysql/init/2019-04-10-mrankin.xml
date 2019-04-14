@@ -29,6 +29,9 @@ values ('superuser@example.com',
         1);
             ]]>
         </sql>
+        <rollback>
+            delete from auth_user where email = 'superuser@example.com';
+        </rollback>
     </changeSet>
     <changeSet id="3" author="mrankin">
         <sql>
@@ -36,6 +39,9 @@ values ('superuser@example.com',
 insert into auth_user_group (email, group_id) VALUES ('superuser@example.com',1)
             ]]>
         </sql>
+        <rollback>
+            DELETE from auth_user_group where email = 'superuser@example.com' and group_id = 1;
+        </rollback>
     </changeSet>
     <changeSet id="4" author="mrankin">
         <createTable tableName="us_state">
@@ -103,6 +109,51 @@ INSERT INTO us_state (code,name) VALUES
         </sql>
         <rollback>
             DELETE FROM us_state;
+        </rollback>
+    </changeSet>
+    <changeSet id="6" author="mrankin">
+        <sql>
+            <![CDATA[
+insert into auth_policy (name, description, is_system) VALUES
+('adminFull','Read/Write access to admin functions',1),
+('developerFull','Read/Write access to the developer section',1)
+            ]]>
+        </sql>
+        <rollback>
+            DELETE from auth_policy where name in ('adminFull','developerFull');
+        </rollback>
+    </changeSet>
+    <changeSet id="7" author="mrankin">
+        <sql>
+            <![CDATA[
+insert into auth_group (id, name, description,is_system) values
+(2,'developers', 'Developers of the application',1)
+            ]]>
+        </sql>
+        <rollback>
+            delete from auth_group where id = 2;
+        </rollback>
+    </changeSet>
+    <changeSet id="8" author="mrankin">
+        <sql>
+            <![CDATA[
+insert into auth_group_policy (policy_name,group_id) VALUES
+('developerFull',2)
+            ]]>
+        </sql>
+        <rollback>
+            delete from auth_group_policy where policy_name = 'developerFull' and group_id = 2
+        </rollback>
+    </changeSet>
+    <changeSet id="9" author="mrankin">
+        <sql>
+            <![CDATA[
+insert into auth_user_group (email, group_id) values
+('superuser@example.com', 2)
+            ]]>
+        </sql>
+        <rollback>
+            delete from auth_user_group where email='superuser@example.com' and group_id = 2
         </rollback>
     </changeSet>
 </databaseChangeLog>

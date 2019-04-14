@@ -26,7 +26,6 @@
 				<table class="table table-sm">
 					<thead class="thead-inverse">
 						<tr>
-							<th></th>
 							<th>Name</th>
 							<th>Description</th>
 							<th class="text-sm-center">System</th>
@@ -37,20 +36,18 @@
 						<cfloop array="#rc.policies#" index="policy">
 							<tr>
 								<td>
-									<div class="form-check">
-										<label class="form-check-label">
-											<input class="form-check-input chk" name="name" type="checkbox" #(rc.group.hasPolicy(policy))?"checked":""# value="#policy.getName_sn()#"/>
-										</label>
+									<div class="custom-control custom-checkbox">
+										<input class="custom-control-input chk" name="name" id="#policy.getName()#" type="checkbox" #(rc.group.hasPolicy(policy))?"checked":""# value="#policy.getName()#"/>
+										<label for="#policy.getName()#" class="custom-control-label">#policy.getName()#</label>
 									</div>
 								</td>
-								<td>#policy.getName_sn()#</td>
 								<td>#policy.getDescription()#</td>
 								<td class="text-sm-center">
-									<cfif policy.getSystem_yn()>
+									<cfif policy.getIs_system()>
 										<span class="fas fa-check"></span>
 									</cfif>
 								</td>
-								<td>#datetimeformat(policy.getCreated_dtm(),'mm/dd/yyyy h:mm tt')#</td>
+								<td>#datetimeformat(policy.getCreated(),'mm/dd/yyyy h:mm tt')#</td>
 							</tr>
 						</cfloop>
 					</tbody>

@@ -141,8 +141,8 @@
 insert into auth_policy (name, description, is_system) values
     ('sysadminFull', 'System Administrator Access', 1);
 
-insert into auth_group (name, description, is_system) values
-('sysadmins','System Administrators',1);
+insert into auth_group (id, name, description, is_system) values
+(1,'sysadmins','System Administrators',1);
 
 insert into auth_group_policy (policy_name, group_id) VALUES
 ('sysadminFull',1);

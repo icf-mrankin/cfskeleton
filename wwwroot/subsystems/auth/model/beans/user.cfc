@@ -97,7 +97,7 @@ component entityname="User" persistent="true" accessors="true" table="auth_user"
 	public void function generateToken()
 	{
 		var t = createUUID();
-		setToken_txt(t);
+		setToken(t);
 	}
 
 	public boolean function isInGroup(required string groupId)
@@ -137,7 +137,11 @@ component entityname="User" persistent="true" accessors="true" table="auth_user"
 
 	public boolean function holdsAnyPolicy(required string policies)
 	{
-		
+		var policyAry = listToArray(arguments.policies);
+		for (policy in policyAry) {
+			if (holdsPolicy(policy)) return true;
+		}
+		return false;
 	}
 
 	public void function addOwnedGroup( required Group)
