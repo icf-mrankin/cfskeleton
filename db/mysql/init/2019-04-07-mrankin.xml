@@ -42,7 +42,7 @@
             <column name="city" type="varchar(50)" defaultValue=""><constraints nullable="false"/> </column>
             <column name="state" type="char(2)" defaultValue=""><constraints nullable="false"/> </column>
             <column name="zipcode" type="varchar(10)" defaultValue=""><constraints nullable="false"/> </column>
-            <column name="timezone" type="varchar(50)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="timezone" type="varchar(64)" defaultValue=""><constraints nullable="false"/> </column>
             <column name="is_password_change_required" type="bit(1)" defaultValueBoolean="0"><constraints nullable="false"/> </column>
             <column name="is_locked" type="bit(1)" defaultValueBoolean="0"><constraints nullable="false"/> </column>
             <column name="login_attempts" type="integer" defaultValueNumeric="0"><constraints nullable="false"/> </column>

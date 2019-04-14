@@ -6,14 +6,14 @@
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet id="1" author="mrankin">
         <createTable tableName="time_zone_name">
-            <column name="Name" type="char(64)"><constraints nullable="false" primaryKeyName="pk_time_zone_name" primaryKey="true"/> </column>
-            <column name="Time_zone_id" type="int(10) unsigned"><constraints nullable="false"/> </column>
+            <column name="name" type="varchar(64)"><constraints nullable="false"/> </column>
+            <column name="time_zone_id" type="int(10) unsigned"><constraints nullable="false" primaryKey="true" primaryKeyName="pk_time_zone_name"/> </column>
         </createTable>
     </changeSet>
     <changeSet id="2" author="mrankin">
         <loadData tableName="time_zone_name" file="init/time_zone_name.csv">
-            <column name="Name" type="STRING"/>
-            <column name="Time_zone_id" type="NUMERIC"/>
+            <column name="name" type="STRING"/>
+            <column name="time_zone_id" type="NUMERIC"/>
         </loadData>
         <rollback>
             DELETE from time_zone_name;
@@ -37,5 +37,17 @@
             <column name="is_dst" type="BOOLEAN"/>
             <column name="abbreviation" type="STRING"/>
         </loadData>
+        <rollback>
+            DELETE from time_zone_transition
+        </rollback>
+    </changeSet>
+    <changeSet id="5" author="mrankin">
+        <addForeignKeyConstraint
+                baseTableName="time_zone_transition"
+                baseColumnNames="time_zone_id"
+                constraintName="fk_time_zone_transition__time_zone_name"
+                referencedTableName="time_zone_name"
+                referencedColumnNames="time_zone_id"
+                onDelete="CASCADE" onUpdate="CASCADE"/>
     </changeSet>
 </databaseChangeLog>
