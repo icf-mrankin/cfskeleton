@@ -79,10 +79,9 @@
 				<div class="col-sm-12 pt-1">
 					<form id="groupFrm" method="post" action="">
 						<table class="table table-hover mt-3 table-sm">
-							<thead class="thead-inverse">
+							<thead class="thead-dark">
 								<tr>
-									<th></th>
-									<th>Group Name</th>
+									<th>Name</th>
 									<th>Description</th>
 									<th>Policies</th>
 									<th>Users</th>
@@ -96,10 +95,9 @@
 										<td>
 											<div class="custom-control custom-checkbox">
 												<input class="custom-control-input chk" name="id" id="#group.getId()#" type="checkbox" value="#group.getId()#"/>
-												<label class="custom-control-label" for="#group.getId()#"></label>
+												<label class="custom-control-label" for="#group.getId()#">#group.getName()#</label>
 											</div>
 										</td>
-										<td>#group.getName()#</td>
 										<td>#group.getDescription()#</td>
 										<td>#arrayLen(group.getPolicies())#</td>
 										<td>#arrayLen(group.getUsers())#</td>

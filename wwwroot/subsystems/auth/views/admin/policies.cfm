@@ -30,9 +30,9 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-12 pt-1">
+				<div class="col-sm-12">
 					<table class="table table-hover table-sm mt-3" id="policyTbl">
-						<thead class="thead-inverse">
+						<thead class="thead-dark">
 							<tr>
 								<th>Name</th>
 								<th>Description</th>
