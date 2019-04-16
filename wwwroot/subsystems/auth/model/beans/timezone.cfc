@@ -1,17 +1,13 @@
 component entityname="Timezone" persistent="true" accessors="true" table="time_zone_name" readonly="true" 
 {
-	property name="timezone_id" fieldtype="id" generator="assigned" type="numeric" ormType="integer" sqltype="int";
+	property name="time_zone_id" fieldtype="id" generator="assigned" type="numeric" ormType="integer" sqltype="int";
 	property name="name" type="string" sqlType="varchar(64)";
 	
 	// relationships
-	// one owner can have many groups
-	/* property name="owner" fieldtype="many-to-one" cfc="User" fkcolumn="owner"; */
-	// many groups can have many users
-	property name="users" fieldtype="many-to-many" cfc="User" type="array" singularname="user" orderby="last_name asc, first_name asc" linktable="auth_user_group" fkcolumn="group_id" inversejoincolumn="email" inverse="true";
-	// many groups can have many policies
-	property name="policies" fieldtype="many-to-many" cfc="Policy" type="array" singularname="policy" orderby="name" linktable="auth_group_policy" fkcolumn="group_id" inversejoincolumn="policy_name" inverse="true";
+	// one timezone can have many transitions
+	property name="timezone_transitions" singularname="timezone_transition" fieldtype="one-to-many" cfc="timezoneTransition" fkcolumn="time_zone_id" type="array" lazy="extra" orderby="transition_id";
 
-	public Group function init(
+	public Timezone function init(
 		string name = '',
 	)
 	{

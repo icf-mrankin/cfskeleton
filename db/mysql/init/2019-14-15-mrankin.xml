@@ -22,17 +22,17 @@
     <changeSet id="3" author="mrankin">
         <createTable tableName="time_zone_transition">
             <column name="time_zone_id" type="int(10) unsigned"><constraints nullable="false"/> </column>
-            <column name="transition_type_id" type="int(10) unsigned"><constraints nullable="false"/> </column>
+            <column name="transition_id" type="int(10) unsigned"><constraints nullable="false"/> </column>
             <column name="offset" type="integer" defaultValueNumeric="0"><constraints nullable="false"/> </column>
             <column name="is_dst" type="bit(1)" defaultValueBoolean="false"><constraints nullable="false"/> </column>
             <column name="abbreviation" type="char(8)" defaultValue=""><constraints nullable="false"/> </column>
         </createTable>
-        <addPrimaryKey tableName="time_zone_transition" columnNames="time_zone_id,transition_type_id"/>
+        <addPrimaryKey tableName="time_zone_transition" columnNames="time_zone_id,transition_id"/>
     </changeSet>
     <changeSet id="4" author="mrankin">
         <loadData tableName="time_zone_transition" file="init/time_zone_transition.csv">
             <column name="time_zone_id" type="NUMERIC"/>
-            <column name="transition_type_id" type="NUMERIC"/>
+            <column name="transition_id" type="NUMERIC"/>
             <column name="offset" type="NUMERIC"/>
             <column name="is_dst" type="BOOLEAN"/>
             <column name="abbreviation" type="STRING"/>

@@ -210,7 +210,8 @@ component extends="base"
 		param name='rc.email' default='';
 
 		rc.states = entityLoad('State');
-		rc.person = entityLoadByPk('User', lcase(rc.email));		
+		rc.person = entityLoadByPk('User', lcase(rc.email));
+		rc.timezones = entityLoad('Timezone');	
 
 		if (!isDefined('rc.person'))
 		{

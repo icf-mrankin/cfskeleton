@@ -1,4 +1,4 @@
-time_zone_id,transition_type_id,offset,is_dst,abbreviation
+time_zone_id,transition_id,offset,is_dst,abbreviation
 1,0,-968,0,LMT
 1,1,0,0,GMT
 2,0,-52,0,LMT

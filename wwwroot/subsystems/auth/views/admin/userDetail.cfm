@@ -80,8 +80,8 @@
 					<div class="form-group col-md-5 order-7 order-md-10">
 						<label for="timezone">Timezone</label>
 						<select class="custom-select" name="timezone">
-							<cfloop query="rc.timezones">
-								<option (name = rc.person.getTimezone())?"selected":"">#name#</option>
+							<cfloop array="#rc.timezones#" item="timezone">
+								<option (name = rc.person.getTimezone())?"selected":"">#timezone.getName()#</option>
 							</cfloop>
 						</select>
 					</div>
