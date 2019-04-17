@@ -81,7 +81,7 @@
 						<label for="timezone">Timezone</label>
 						<select class="custom-select" name="timezone">
 							<cfloop array="#rc.timezones#" item="timezone">
-								<option (name = rc.person.getTimezone())?"selected":"">#timezone.getName()#</option>
+								<option #(timezone.getName() eq rc.person.getTimezone())?"selected":""#>#timezone.getName()#</option>
 							</cfloop>
 						</select>
 					</div>
