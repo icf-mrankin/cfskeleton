@@ -1,0 +1,53 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="1" author="mrankin">
+        <createTable tableName="time_zone_name">
+            <column name="name" type="varchar(64)"><constraints nullable="false"/> </column>
+            <column name="time_zone_id" type="int(10) unsigned"><constraints nullable="false" primaryKey="true" primaryKeyName="pk_time_zone_name"/> </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="mrankin">
+        <loadData tableName="time_zone_name" file="init/time_zone_name.csv">
+            <column name="name" type="STRING"/>
+            <column name="time_zone_id" type="NUMERIC"/>
+        </loadData>
+        <rollback>
+            DELETE from time_zone_name;
+        </rollback>
+    </changeSet>
+    <changeSet id="3" author="mrankin">
+        <createTable tableName="time_zone_transition">
+            <column name="time_zone_id" type="int(10) unsigned"><constraints nullable="false"/> </column>
+            <column name="transition_id" type="int(10) unsigned"><constraints nullable="false"/> </column>
+            <column name="offset" type="integer" defaultValueNumeric="0"><constraints nullable="false"/> </column>
+            <column name="is_dst" type="bit(1)" defaultValueBoolean="false"><constraints nullable="false"/> </column>
+            <column name="abbreviation" type="char(8)" defaultValue=""><constraints nullable="false"/> </column>
+        </createTable>
+        <addPrimaryKey tableName="time_zone_transition" columnNames="time_zone_id,transition_id"/>
+    </changeSet>
+    <changeSet id="4" author="mrankin">
+        <loadData tableName="time_zone_transition" file="init/time_zone_transition.csv">
+            <column name="time_zone_id" type="NUMERIC"/>
+            <column name="transition_id" type="NUMERIC"/>
+            <column name="offset" type="NUMERIC"/>
+            <column name="is_dst" type="BOOLEAN"/>
+            <column name="abbreviation" type="STRING"/>
+        </loadData>
+        <rollback>
+            DELETE from time_zone_transition
+        </rollback>
+    </changeSet>
+    <changeSet id="5" author="mrankin">
+        <addForeignKeyConstraint
+                baseTableName="time_zone_transition"
+                baseColumnNames="time_zone_id"
+                constraintName="fk_time_zone_transition__time_zone_name"
+                referencedTableName="time_zone_name"
+                referencedColumnNames="time_zone_id"
+                onDelete="CASCADE" onUpdate="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>

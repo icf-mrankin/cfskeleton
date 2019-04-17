@@ -9,9 +9,6 @@
 			$('.user').click(function(){
 				location.assign("#buildURL(action='auth:admin.userDetail', querystring='email=')#" + $(this).data('email'));
 			});
-
-			$('##userTbl').DataTable();
-			$('##userTbl_wrapper').removeClass('container-fluid');
 		});
 	</script>
 	
@@ -26,9 +23,9 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-12 mt-3">
-					<table id="userTbl" class="table table-hover table-sm">
-						<thead class="thead-inverse">
+				<div class="col-sm-12">
+					<table id="userTbl" class="table table-hover table-sm mt-3">
+						<thead class="thead-dark">
 							<tr>
 								<th>Name</th>
 								<th>Email</th>

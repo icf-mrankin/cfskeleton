@@ -77,6 +77,14 @@
 						<label for="zip">Zip Code</label>
 						<input type="text" class="form-control" id="zipCode" name="zipCode" placeholder="Zip" value="#rc.person.getZipCode()#">
 					</div>
+					<div class="form-group col-md-5 order-7 order-md-10">
+						<label for="timezone">Timezone</label>
+						<select class="custom-select" name="timezone">
+							<cfloop array="#rc.timezones#" item="timezone">
+								<option #(timezone.getName() eq rc.person.getTimezone())?"selected":""#>#timezone.getName()#</option>
+							</cfloop>
+						</select>
+					</div>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-md-3 order-1">

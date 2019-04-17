@@ -8,6 +8,11 @@
 	  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 	    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 	      <cfif structKeyExists(rc,'user')>
+	      	<cfif rc.user.holdsAnyPolicy('sysadminFull','developer')>
+	      		<li class="nav-item">
+	      			<a class="nav-link" href="#buildURL(action='cfskeleton:devs.default')#">Developers</a>
+	      		</li>
+	      	</cfif>
 	        <cfif rc.user.holdsPolicy('sysadminFull')>
 	          <li class="nav-item">
 	            <a class="nav-link" href="#buildURL(action='admin:main.default')#">Admin</a>
