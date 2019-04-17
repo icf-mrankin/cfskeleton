@@ -12,6 +12,14 @@ A utility project to get you up and running quickly with a simple Lucee based we
 
 Check out the project from https://github.com/icf-mrankin/cfskeleton.git using your git tools of choice to a good working directory
 
+## Prerequisites
+
+In order to use this project you need to have the following applications installed and running:
+
+- [nodejs](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com)
+- [docker](https://www.docker.com/get-started)
+
 ## Starting the network
 
 Included in the download are the files necessary to start a small local network with Docker with:

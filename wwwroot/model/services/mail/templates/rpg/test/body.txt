@@ -1,8 +1,0 @@
-Test Mail (text version)
---------------------------------------------------------------------------------
-Hi there {first_name} {last_name},
-
-This is a test message.
---------------------------------------------------------------------------------
-This message was sent from an outbound-only server.
-Please do not respond directly to this message.
