@@ -4,10 +4,10 @@
 	</div>
 	<h4>Guides</h4>
 	<div class="nav flex-column nav-pills">
-		<a class="nav-link #(getFullyQualifiedAction( action ) eq 'cfskeleton:devs.build_watch')?'active':''#" href="#buildURL('devs.build_watch')#">build/watch</a>
 		<a class="nav-link #(getFullyQualifiedAction( action ) eq 'cfskeleton:devs.css_sass')?'active':''#" href="#buildURL('devs.css_sass')#">css/sass</a>
 		<a class="nav-link #(getFullyQualifiedAction( action ) eq 'cfskeleton:devs.database')?'active':''#" href="#buildURL('devs.database')#">database</a>
 		<a class="nav-link #(getFullyQualifiedAction( action ) eq 'cfskeleton:devs.javascript')?'active':''#" href="#buildURL('devs.javascript')#">javascript</a>
+		<a class="nav-link #(getFullyQualifiedAction( action ) eq 'cfskeleton:devs.watch_build')?'active':''#" href="#buildURL('devs.watch_build')#">watch/build</a>
 	</div>
 	<h4>Subsystems</h4>
 	<div class="nav flex-column nav-pills">
