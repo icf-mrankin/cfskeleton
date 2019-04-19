@@ -24,6 +24,8 @@ services:
   db:
     container_name: cfsdb
     image: mysql/mysql-server:5.7.16
+    restart: always
+    command: mysqld --general-log=1 --general-log-file=/var/log/mysql/general-log.log
     ports:
       - "3306:3306"
     volumes:
