@@ -9,6 +9,11 @@
 			<p>Several pieces of code included with cfskeleton will help you get your app up and running quickly.  Use this
 				documentation as a guide to leveraging these bits of code quickly.  Rip out anything you don't need or lock it 
 				behind the authentication system.
+			<p><strong>Hey, where's my home page?</strong></p>
+			<p>In order to see something when you initialize a new system, we redirect from the normal homepage to 
+				cfskeleton:main.default.  You'll find this redirect in /wwwroot/controllers/main.cfc.  Feel free to remove 
+				it when you are ready to begin work on your project.  If you want to visit the cfskeleton page again, browse to
+				http://localhost/index.cfm?action=cfskeleton:main.default.
 			<h2>Guides</h2>
 			<p>The guides provide some insight into how the application is strucgtured and how to make use of some of the 
 			accompanying tools like webpack and liquibase that are bundled in the app.</p>

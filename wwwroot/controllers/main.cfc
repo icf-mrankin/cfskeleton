@@ -9,7 +9,7 @@ component
 	{
 		rc.title = "Home";
 
-		// Visit the cfskeleton home page
+		// Visit the cfskeleton home page - remove this to see your own home page.
 		fw.redirect(action='cfskeleton:main.default');
 	}
 }
