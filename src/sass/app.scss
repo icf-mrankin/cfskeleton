@@ -54,3 +54,7 @@ STRONG {
 	color: #ffffff;
 }
 
+.nav-pills a {
+	color: lighten($component-active-bg,10%);
+}
+

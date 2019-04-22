@@ -3,39 +3,35 @@
 // Variables should follow the `$component-state-property-size` formula for
 // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
 
-$blue:    #006699; //#007bcc;
-
-$primary:       $blue;
-$secondary:     $gray-600;
-$success:       $green;
-$info:          $cyan;
-$warning:       $yellow;
-$danger:        $red;
-$light:         $gray-100;
-$dark:          $gray-800;
 
 // background
 $body-bg: #2D2E31;
 $body-color: #9A9A9A;
+
+// Components
+$component-active-bg: darken($green,15%);
 
 // cards
 $card-cap-bg: #415047;
 $card-bg: #353639;
 
 // forms and input controls
-$input-bg:                              $gray-500;
-$input-disabled-bg:                     $gray-200;
-$input-group-addon-bg:                  $gray-500;
-$component-active-bg: $purple;
+$input-bg:  #2D2E31;
 
-$input-color:                           $gray-700 ;
-// $input-border-color:                    $gray-400 ;
-// $input-border-width:                    $input-btn-border-width;
-$input-box-shadow:                      inset 0 1px 1px rgba($black, .075); 
+$input-color: $gray-400;
+$input-border-color: $gray-700;
 
-// links
-$link-color:                              theme-color("secondary");
-$link-hover-color:                        lighten($link-color, 15%);
+$input-focus-bg: lighten($input-bg, 5%);
+$input-focus-border-color: $gray-600;
+$input-focus-color: $input-color;
+
+$input-group-addon-color: $input-color;
+$input-group-addon-bg: $input-bg;
+$input-group-addon-border-color: $input-border-color;
+
+// navs
+$nav-pills-link-active-color: $component-active-color;
+$nav-pills-link-active-bg: $component-active-bg;
 
 // list-groups
 $list-group-bg: $gray-700;
