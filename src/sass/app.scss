@@ -1,10 +1,10 @@
+// bootstrap variable overrides
+@import 'variables';
+
 // bootstrap - required
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
-
-// bootstrap variable overrides
-@import 'variables';
 
 // bootstrap - optional
 @import '~bootstrap/scss/root';
