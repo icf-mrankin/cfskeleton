@@ -72,6 +72,9 @@
 				</div>
 				<div class="card-body">
 					<p>Login, administration, and authorization are handled by our first subsystem.  Optional two-factor authentication is included.</p>
+					<p>Initial login</p>
+					<p>Email: <strong>superuser@example.com</strong><br/>Password: <strong>CF-skeleton</strong></p>
+					<p>You really need to change these before you push code anywhere.  Seriously.</p>
 				</div>
 			</div>
 
