@@ -6,3 +6,5 @@ build/
 build_archive/
 
 wwwroot/static/
+
+\.vscode/settings\.json
