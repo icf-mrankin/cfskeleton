@@ -12,15 +12,15 @@ component entityname="User" persistent="true" accessors="true" table="auth_user"
 	property name="city";
 	property name="state";
 	property name="zipcode";
-	property name="created";
+	property name="created" type="date";
 	property name="created_by";
-	property name="updated";
+	property name="updated" type="date";
 	property name="updated_by";
 	property name="timezone";
 	property name="is_password_change_required" type="boolean";
 	property name="is_locked" type="boolean";
 	property name="login_attempts";
-	property name="last_login";
+	property name="last_login" type="date";
 	property name="secret32";
 	property name="is_mfa_exempt" type="boolean";
 

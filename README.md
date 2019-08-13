@@ -28,10 +28,10 @@ Included in the download are the files necessary to start a small local network 
 - A mysql database
 - a mailcatcher instance to work with mail locally
 
-Open a bash terminal and run:
+Open a bash terminal and navigate to the root of where you checked out cfskeleton. Then run:
 
 ```bash
-docker-compose up
+docker-compose up -d
 ```
 
 That will start your machines.
@@ -63,3 +63,11 @@ npm run build-mac
 ```
 
 to create a war file for distribution to hosting environements like AWS or any other jee server that Lucee supports.  We've included Lucee in the project and the build, so you don't have to do any sort of installation on the host, just drop in the war file and you should be up and running.  Granted, this is a simple setup and you may have to tweak things if you intend to go to production.
+
+## Initialize the database
+CFSkeleton has been set up with liquibase so that you can manage your database changes in xml and commit them to source control.
+
+Set up the initial database by going to *cfskeleton root*/db/mysql in the command prompt.  Then execute:
+```bash
+./liquibase update
+```
