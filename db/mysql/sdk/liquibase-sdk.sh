@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#! /bin/sh
 
 if [ ! -n "${LIQUIBASE_HOME+x}" ]; then
-  # echo "LIQUIBASE_HOME is not set."
+  # echo "Liquibase Home is not set."
 
   ## resolve links - $0 may be a symlink
   PRG="$0"
@@ -16,10 +16,12 @@ if [ ! -n "${LIQUIBASE_HOME+x}" ]; then
   done
 
 
-  LIQUIBASE_HOME=`dirname "$PRG"`
-
+  LIQUIBASE_SDK_HOME=`dirname "$PRG"`
   # make it fully qualified
-  LIQUIBASE_HOME=`cd "$LIQUIBASE_HOME" && pwd`
+  LIQUIBASE_SDK_HOME=`cd "$LIQUIBASE_SDK_HOME" && pwd`
+
+  LIQUIBASE_HOME=`dirname "$LIQUIBASE_SDK_HOME"`
+
   # echo "Liquibase Home: $LIQUIBASE_HOME"
 fi
 
@@ -35,29 +37,24 @@ if [ -f /usr/bin/cygpath ]; then
     i=`cygpath --windows "$i"`
     CP="$CP;$i"
   done
+  for i in "$LIQUIBASE_HOME"/sdk/lib-sdk/*.jar; do
+    i=`cygpath --windows "$i"`
+    CP="$CP;$i"
+  done
 else
-  if [[ $(uname) = MINGW* ]]; then
-    CP_SEPARATOR=";"
-  else
-    CP_SEPARATOR=":"
-  fi
   CP=.
   for i in "$LIQUIBASE_HOME"/liquibase*.jar; do
-    CP="$CP""$CP_SEPARATOR""$i"
+    CP="$CP":"$i"
   done
-  CP="$CP""$CP_SEPARATOR""$LIQUIBASE_HOME/lib/"
   for i in "$LIQUIBASE_HOME"/lib/*.jar; do
-    CP="$CP""$CP_SEPARATOR""$i"
+    CP="$CP":"$i"
+  done
+  for i in "$LIQUIBASE_HOME"/sdk/lib-sdk/*.jar; do
+    CP="$CP":"$i"
   done
 fi
 
 # add any JVM options here
-JAVA_OPTS="${JAVA_OPTS-}"
+JAVA_OPTS=
 
-# to see the actual command, uncomment the echo line below.
-_cmd="java -cp \"$CP\" $JAVA_OPTS liquibase.integration.commandline.Main ${1+$@}"
-#echo $_cmd
-#echo ""
-$_cmd
-
-
+java -cp "$CP" $JAVA_OPTS liquibase.sdk.Main ${1+"$@"}
