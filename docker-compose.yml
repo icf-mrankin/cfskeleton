@@ -31,6 +31,7 @@ services:
       - ./local_containers/db/data:/var/lib/mysql
       - ./local_containers/db/logs:/var/log/mysql 
       - ./local_containers/db/conf:/etc/mysql/conf.d 
+      - ./local_containers/db/files:/var/lib/mysql-files
     environment:
       - MYSQL_ROOT_PASSWORD=MyDogHas1Flea
       - MYSQL_DATABASE=cfskeleton

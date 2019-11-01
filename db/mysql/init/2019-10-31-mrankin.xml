@@ -5,8 +5,52 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet id="1" author="mrankin">
-        <createTable tableName="wf_workflow">
-            <column name=""></column>
+        <createTable tableName="wf_process">
+            <column name="id" type="int unsigned" autoIncrement="true"><constraints primaryKey="true" primaryKeyName="wf_workflow_pk" nullable="false"/> </column>
+            <column name="name" type="varchar(100)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="created_by" type="varchar(255)"><constraints nullable="false"/> </column>
+            <column name="created" type="timestamp" defaultValueComputed="now()"><constraints nullable="false"/> </column>
         </createTable>
+    </changeSet>
+    <changeSet id="2" author="mrankin">
+        <createTable tableName="wf_process_admin">
+            <column name="wf_process_id" type="int unsigned"><constraints nullable="false"/> </column>
+            <column name="auth_user_email" type="varchar(255)"><constraints nullable="false"/> </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="mrankin">
+        <addPrimaryKey tableName="wf_process_admin" columnNames="wf_process_id,auth_user_email" constraintName="wf_process_admin_pk"/>
+        <addForeignKeyConstraint
+                baseTableName="wf_process_admin"
+                baseColumnNames="wf_process_id"
+                constraintName="wf_process_admin$wf_process_id_fk"
+                referencedTableName="wf_process"
+                referencedColumnNames="id"
+                onDelete="CASCADE" onUpdate="CASCADE"/>
+        <addForeignKeyConstraint
+                baseTableName="wf_process_admin"
+                baseColumnNames="auth_user_email"
+                constraintName="wf_process_admin$auth_user_email_fk"
+                referencedTableName="auth_user"
+                referencedColumnNames="email"
+                onUpdate="CASCADE" onDelete="CASCADE"/>
+    </changeSet>
+    <changeSet id="4" author="mrankin">
+        <createTable tableName="wf_request">
+            <column name="id" type="int unsigned"><constraints primaryKey="true" primaryKeyName="wf_request_pk" nullable="false"/> </column>
+            <column name="wf_process_id" type="int unsigned"><constraints nullable="false"/> </column>
+            <column name="name" type="varchar(200)" defaultValue=""><constraints nullable="false"/> </column>
+            <column name="created_by" type="varchar(255)"><constraints nullable="false"/> </column>
+            <column name="created" type="timestamp" defaultValueComputed="now()"><constraints nullable="false"/> </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="mrankin">
+        <addForeignKeyConstraint
+                baseTableName="wf_request"
+                baseColumnNames="wf_process_id"
+                constraintName="wf_request$wf_process_id_fk"
+                referencedTableName="wf_process"
+                referencedColumnNames="id"
+                onDelete="CASCADE" onUpdate="CASCADE"/>
     </changeSet>
 </databaseChangeLog>
