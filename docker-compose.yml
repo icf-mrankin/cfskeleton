@@ -1,8 +1,8 @@
-version: '2'
+version: '3'
 services:
   web:
     container_name: cfsweb
-    image: lucee/lucee52-nginx:latest
+    image: lucee/lucee:5.3-nginx
     ports:
       - "80:8888"
       - "443:8443"
